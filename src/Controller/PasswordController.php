@@ -81,4 +81,18 @@ class PasswordController extends AbstractController
             return $this->json(['Message' => 'Password does not exist'], status: 400);
         }
     }
+    //http:localhost:8000/password/1 GET
+    #[Route('/password/{id}', name: 'app_edit_password', methods: ['PUT'])]
+    public function editPassword(Request $request, int $id)
+    {
+        $userPassword = json_decode($request->getContent());
+        $password = $this->repository->find($id);
+        if ($password != null) {
+            $password->setPassword($userPassword->password);
+            $this->entityManager->flush();
+            return $this->json($password);
+        } else {
+            return $this->json(['Message' => 'Password does not exist'], status: 400);
+        }
+    }
 }
