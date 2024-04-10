@@ -1,4 +1,4 @@
-<h1 align="center">Password Manager</h1>
+<h1 align="center">Password Manager 📝</h1>
 
 > This is a full website to manage passwords with a friendly UI.
 
