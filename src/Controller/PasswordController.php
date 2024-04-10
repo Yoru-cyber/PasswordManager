@@ -30,8 +30,8 @@ class PasswordController extends AbstractController
 
         $this->serializer = new Serializer($this->normalizers, $this->encoders);
     }
-    //http:localhost:8000/password GET
-    #[Route('/password', name: 'app_password', methods: ['GET'])]
+    //http:localhost:8000/v1/password GET
+    #[Route('/v1/password', name: 'app_password', methods: ['GET'])]
     public function index(): JsonResponse
     {
         $list = $this->entityManager->getRepository(Password::class)->findAll();
@@ -42,8 +42,8 @@ class PasswordController extends AbstractController
             json_decode($this->serializer->serialize($list, 'json'))
         );
     }
-    //http:localhost:8000/password POST
-    #[Route('/password', name: 'app_create_password', methods: ['POST'])]
+    //http:localhost:8000/v1/password POST
+    #[Route('/v1/password', name: 'app_create_password', methods: ['POST'])]
     public function createPassword(Request $request)
     {
         $userPassword = json_decode($request->getContent());
@@ -57,8 +57,8 @@ class PasswordController extends AbstractController
             return $this->json(['Message' => 'Invalid request'], status: 400);
         }
     }
-    //http:localhost:8000/password/1 DELETE
-    #[Route('/password/{id}', name: 'app_delete_password', methods: ['DELETE'])]
+    //http:localhost:8000/v1/password/1 DELETE
+    #[Route('/v1/password/{id}', name: 'app_delete_password', methods: ['DELETE'])]
     public function deletePassword(int $id)
     {
         $password = $this->repository->find($id);
@@ -70,8 +70,8 @@ class PasswordController extends AbstractController
             return $this->json(['Message' => 'Password does not exist'], status: 400);
         }
     }
-    //http:localhost:8000/password/1 GET
-    #[Route('/password/{id}', name: 'app_get_password', methods: ['GET'])]
+    //http:localhost:8000/v1/password/1 GET
+    #[Route('/v1/password/{id}', name: 'app_get_password', methods: ['GET'])]
     public function getPassword(int $id)
     {
         $password = $this->repository->find($id);
@@ -81,8 +81,8 @@ class PasswordController extends AbstractController
             return $this->json(['Message' => 'Password does not exist'], status: 400);
         }
     }
-    //http:localhost:8000/password/1 GET
-    #[Route('/password/{id}', name: 'app_edit_password', methods: ['PUT'])]
+    //http:localhost:8000/v1/password/1 GET
+    #[Route('/v1/password/{id}', name: 'app_edit_password', methods: ['PUT'])]
     public function editPassword(Request $request, int $id)
     {
         $userPassword = json_decode($request->getContent());
