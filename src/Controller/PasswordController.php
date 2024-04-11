@@ -39,7 +39,8 @@ class PasswordController extends AbstractController
             return $this->json(['message' => 'No passwords found']);
         }
         return $this->json(
-            json_decode($this->serializer->serialize($list, 'json'))
+            json_decode($this->serializer->serialize($list, 'json')),
+            status: 200
         );
     }
     //http:localhost:8000/v1/password POST
@@ -52,7 +53,7 @@ class PasswordController extends AbstractController
             $password->setPassword($userPassword->password);
             $this->entityManager->persist($password);
             $this->entityManager->flush();
-            return $this->json(json_decode($this->serializer->serialize($password, 'json')));
+            return $this->json(json_decode($this->serializer->serialize($password, 'json')), 201);
         } else {
             return $this->json(['Message' => 'Invalid request'], status: 400);
         }
@@ -65,7 +66,7 @@ class PasswordController extends AbstractController
         if ($password != null) {
             $this->entityManager->remove($password);
             $this->entityManager->flush();
-            return $this->json(['Message' => 'Password removed']);
+            return $this->json(['Message' => 'Password removed'], status: 200);
         } else {
             return $this->json(['Message' => 'Password does not exist'], status: 400);
         }
@@ -76,7 +77,7 @@ class PasswordController extends AbstractController
     {
         $password = $this->repository->find($id);
         if ($password != null) {
-            return $this->json($password);
+            return $this->json($password, status: 200);
         } else {
             return $this->json(['Message' => 'Password does not exist'], status: 400);
         }
@@ -90,7 +91,7 @@ class PasswordController extends AbstractController
         if ($password != null) {
             $password->setPassword($userPassword->password);
             $this->entityManager->flush();
-            return $this->json($password);
+            return $this->json($password, status: 200);
         } else {
             return $this->json(['Message' => 'Password does not exist'], status: 400);
         }
