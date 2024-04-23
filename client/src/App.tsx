@@ -12,9 +12,31 @@ function App() {
     <>
       <h1 className="font-bold tracking-widest">My Password Manager</h1>
       <div className="grid grid-cols-1 grid-rows-2 h-[90vh] tracking-wider">
-        <section id="cards" className="flex flex-row p-5 h-fit">
-          {isPending && <div>Loading....</div>}
-          {error && <div>{error}</div>}
+        <section
+          id="cards"
+          className="flex flex-row p-5 justify-center h-fit w-full"
+        >
+          {isPending && <h1>Loading....</h1>}
+          {error &&
+            (console.log(error),
+            (
+              <div role="alert" className="alert alert-error w-fit">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="stroke-current shrink-0 h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <span>{error.message}</span>
+              </div>
+            ))}
           {data &&
             data.map((password: IPassword) => (
               <Card
