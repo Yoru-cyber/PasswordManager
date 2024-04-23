@@ -11,10 +11,10 @@ function App() {
   return (
     <>
       <h1 className="font-bold tracking-widest">My Password Manager</h1>
-      <div className="grid grid-cols-1 grid-rows-2 h-[90vh] tracking-wider">
+      <div className="flex flex-col  tracking-wider">
         <section
           id="cards"
-          className="flex flex-row p-5 justify-center h-fit w-full"
+          className="flex flex-row flex-wrap p-5 justify-center h-fit w-full"
         >
           {isPending && <h1>Loading....</h1>}
           {error &&
@@ -49,7 +49,7 @@ function App() {
         </section>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-plus bg-gradient-to-br from-[--primary] to-purple-800 w-10 h-10 mr-5 rounded-lg justify-self-end self-end transition transform hover:scale-110 ease-in-out"
+          className="icon icon-tabler icon-tabler-plus bg-gradient-to-br from-[--primary] to-purple-800 w-10 h-10 mr-5 mb-5 rounded-lg justify-self-end self-end transition transform hover:scale-110 ease-in-out"
           width="44"
           height="44"
           viewBox="0 0 24 24"
